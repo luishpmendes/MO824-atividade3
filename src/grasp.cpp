@@ -20,8 +20,8 @@ tSolution greedyRandomizedConstruction (matrix A, vector <double> incrementalUti
 
     while (true) {
         for (ulint i = 0; i < A.size(); i++) {
-            if (result.first[i] == 0 && (i <= 0 || result.first[i - 1] == 0) && (i >= A.size() - 1 || result.first[i + 1] == 0)) { // if canditade can be put in solution
-                if ((*incrementalUtility)[i] > 0) { // if this candidate can improve solution
+            if (result.first[i] == 0 && (i <= 0 || result.first[i - 1] == 0) && (i >= A.size() - 1 || result.first[i + 1] == 0)) { // if 'i' can be put in solution
+                if ((*incrementalUtility)[i] > 0) { // if 'i' can improve solution
                     if (minUtility > (*incrementalUtility)[i]) {
                         minUtility = (*incrementalUtility)[i];
                     }
@@ -31,11 +31,17 @@ tSolution greedyRandomizedConstruction (matrix A, vector <double> incrementalUti
                 }
             }
         }
+        // compute restriction
         double restriction = maxUtility - alpha * (maxUtility - minUtility);
+        // populate RCL
         vector < pair <ulint, double> > restrictedCandidateList;
         for (ulint i = 0; i < A.size(); i++) {
-            if ((*incrementalUtility)[i] >= restriction) {
-                restrictedCandidateList.push_back(make_pair(i, (*incrementalUtility)[i]));
+            if (result.first[i] == 0 && (i <= 0 || result.first[i - 1] == 0) && (i >= A.size() - 1 || result.first[i + 1] == 0)) { // if 'i' can be put in solution
+                if ((*incrementalUtility)[i] > 0) { // if 'i' can improve solution
+                    if ((*incrementalUtility)[i] >= restriction) {
+                        restrictedCandidateList.push_back(make_pair(i, (*incrementalUtility)[i]));
+                    }
+                }
             }
         }
         if (restrictedCandidateList.size() > 0) {
@@ -45,7 +51,7 @@ tSolution greedyRandomizedConstruction (matrix A, vector <double> incrementalUti
             ulint deltaUtility = restrictedCandidateList[s].second;
             result.first[k] = 1;
             result.second += deltaUtility;
-            // atualizando utilidade incremental
+            // update incremental utility
             (*incrementalUtility)[k] += result.first[k] * A[k][k] * result.first[k];
             for (ulint i = 0; i < A.size(); i++) {
                 if (i != k) {
@@ -58,6 +64,7 @@ tSolution greedyRandomizedConstruction (matrix A, vector <double> incrementalUti
                 }
             }
         } else {
+            // if there is no candidate, break out the loop
             break;
         }
     }
