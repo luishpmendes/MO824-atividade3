@@ -13,7 +13,7 @@ typedef unsigned long int ulint;
 typedef vector < vector <double> > matrix;
 typedef pair < vector <uint>, double > tSolution;
 
-tSolution greedyRandomizedConstruction (matrix A, vector <double> * incrementalUtility, double alpha, default_random_engine generator) {
+tSolution greedyRandomizedConstruction (matrix A, double alpha, default_random_engine generator, vector <double> * incrementalUtility) {
     tSolution result = make_pair(vector <uint> (A.size(), 0), 0.0);
 
     double minUtility = numeric_limits <double> :: max(), maxUtility = numeric_limits <double> :: min();
@@ -52,10 +52,10 @@ tSolution greedyRandomizedConstruction (matrix A, vector <double> * incrementalU
             result.first[i] = 1;
             result.second += deltaUtility;
             // update incremental utility
-            (*incrementalUtility)[i] += result.first[i] * A[i][i] * result.first[i];
+            (*incrementalUtility)[i] += A[i][i];
             for (uint j = 0; j < A.size(); j++) {
                 if (j != i) {
-                    (*incrementalUtility)[j] += result.first[j] * A[j][i] * result.first[i];
+                    (*incrementalUtility)[j] += result.first[j] * (A[j][i] + A[i][j]);
                 }
             }
         } else {
@@ -80,56 +80,21 @@ bool isFeasible(tSolution solution) {
     return true;
 }
 
-bool oneFlip (matrix A, vector <double> * incrementalUtility, default_random_engine generator, tSolution * solution) {
-    bool result = false;
-    vector <uint> neighborhood;
-    for (uint i = 0; i < A.size(); i++) {
-        neighborhood.push_back(i);
-    }
-    bool flag = true;
-    while (flag) {
-        flag = false;
-        shuffle (neighborhood.begin(), neighborhood.end(), generator);
-        for (vector <uint> :: iterator it = neighborhood.begin(); it != neighborhood.end(); it++) {
-            uint i = *it;
-            tSolution newSolution = make_pair(vector <uint> ((*solution).first), (*solution).second);
-            if (newSolution.first[i] == 0) {
-                newSolution.first[i] = 1;
-                newSolution.second += (*incrementalUtility)[i];
-            } else {
-                newSolution.first[i] = 0;
-                newSolution.second -= (*incrementalUtility)[i];
-            }
-            if (isFeasible(newSolution) && newSolution.second >= (*solution).second) {
-                result = true;
-                flag = true;
-                (*solution).first = vector <uint> (newSolution.first);
-                (*solution).second = newSolution.second;
-                // atualizando utilidade incremental
-                if ((*solution).first[i] == 1) {
-                    (*incrementalUtility)[i] += A[i][i];
-                    for (uint j = 0; j < A.size(); j++) {
-                        if (j != i) {
-                            (*incrementalUtility)[j] += (*solution).first[j] * (A[j][i] + A[i][j]);
-                        }
-                    }
-                } else {
-                    (*incrementalUtility)[i] -= A[i][i];
-                    for (uint j = 0; j < A.size(); j++) {
-                        if (j != i) {
-                            (*incrementalUtility)[j] -= (*solution).first[j] * (A[j][i] + A[i][j]);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return result;
+void repair(matrix A, vector <double> * incrementalUtility, tSolution * solution) {
+    // desligar bits até se tornar factível
+    // dar preferencia pros bits que violam mais restricões
+    // em caso de empate, dar preferencia pros que diminuem menos a utilidade
 }
 
-bool twoFlip (matrix A, vector <double> * incrementalUtility, default_random_engine generator, tSolution * solution) {
-    bool result = false;
+void localSearch(matrix A, int searchMethod, default_random_engine generator, vector <double> * incrementalUtility, tSolution * solution) {
     vector < vector <uint> > neighborhood;
+    // 1Flip neighborhood
+    for (uint i = 0; i < A.size(); i++) {
+        vector <uint> neighbor;
+        neighbor.push_back(i);
+        neighborhood.push_back(neighbor);
+    }
+    // 2Flip neighborhood
     for (uint i = 0; i < A.size(); i++) {
         for (uint j = i + 1; j < A.size(); j++) {
             vector <uint> neighbor;
@@ -138,25 +103,60 @@ bool twoFlip (matrix A, vector <double> * incrementalUtility, default_random_eng
             neighborhood.push_back(neighbor);
         }
     }
-    bool flag = true;
-    while (flag) {
-        flag = false;
-        shuffle (neighborhood.begin(), neighborhood.end(), generator);
-        for (vector < vector <uint> > :: iterator it = neighborhood.begin(); it != neighborhood.end(); it++) {
-            vector <uint> neighbor = *it;
-            tSolution newSolution = make_pair(vector <uint> ((*solution).first), (*solution).second);
-            
-            for (vector <uint> :: iterator it2 = neighbor.begin(); it2 != neighbor.end(); it2++) {
-                uint k = *it2;
-
+    // 3Flip neighborhood
+    for (uint i = 0; i < A.size(); i++) {
+        for (uint j = i + 1; j < A.size(); j++) {
+            for (uint k = j + 1; k < A.size(); k++) {
+                vector <uint> neighbor;
+                neighbor.push_back(i);
+                neighbor.push_back(j);
+                neighbor.push_back(k);
+                neighborhood.push_back(neighbor);
             }
         }
     }
-    return result;
-}
-
-void localSearch (matrix A, vector <double> * incrementalUtility, default_random_engine generator, tSolution * solution) {
-
+    shuffle (neighborhood.begin(), neighborhood.end(), generator);
+    for (vector < vector <uint> > :: iterator it = neighborhood.begin(); it != neighborhood.end(); it++) {
+        vector <uint> neighbor = *it;
+        tSolution newSolution = make_pair(vector <uint> ((*solution).first), (*solution).second);
+        vector <double> newIncrementalUtility = vector <double> (*incrementalUtility);
+        for (vector <uint> :: iterator it2 = neighbor.begin(); it2 != neighbor.end(); it2++) {
+            uint i = *it2;
+            if (newSolution.first[i] == 0) {
+                newSolution.first[i] = 1;
+                newSolution.second += newIncrementalUtility[i];
+            } else {
+                newSolution.first[i] = 0;
+                newSolution.second -= newIncrementalUtility[i];
+            }
+            if (newSolution.first[i] == 1) {
+                newIncrementalUtility[i] += A[i][i];
+                for (uint j = 0; j < A.size(); j++) {
+                    if (j != i) {
+                        newIncrementalUtility[j] += newSolution.first[j] * (A[j][i] + A[i][j]);
+                    }
+                }
+            } else {
+                newIncrementalUtility[i] -= A[i][i];
+                for (uint j = 0; j < A.size(); j++) {
+                    if (j != i) {
+                        newIncrementalUtility[j] -= newSolution.first[j] * (A[j][i] + A[i][j]);
+                    }
+                }
+            }
+        }
+        if (!isFeasible(newSolution)) {
+            repair(A, &newIncrementalUtility, &newSolution);
+        }
+        if (isFeasible(newSolution) && newSolution.second > (*solution).second) {
+            if (searchMethod == 0) {
+                break;
+            }
+            (*solution).first = vector <uint> (newSolution.first);
+            (*solution).second = newSolution.second;
+            *incrementalUtility = vector <double> (newIncrementalUtility);
+        }
+    }
 }
 
 bool termination (chrono :: high_resolution_clock :: time_point tBegin, ulint timeLimit) {
@@ -168,13 +168,7 @@ bool termination (chrono :: high_resolution_clock :: time_point tBegin, ulint ti
     return false;
 }
 
-void repair(matrix A, vector <double> * incrementalUtility, tSolution * solution) {
-    // desligar bits até se tornar factível
-    // dar preferencia pros bits que violam mais restricões
-    // em caso de empate, dar preferencia pros que diminuem menos a utilidade
-}
-
-tSolution grasp (matrix A, chrono :: high_resolution_clock :: time_point tBegin, ulint timeLimit, double alpha, ulint seed) {
+tSolution grasp (matrix A, ulint seed, ulint timeLimit, int searchMethod, double alpha, chrono :: high_resolution_clock :: time_point tBegin) {
     tSolution result;
 
     default_random_engine generator (seed);
@@ -182,8 +176,8 @@ tSolution grasp (matrix A, chrono :: high_resolution_clock :: time_point tBegin,
     vector <double> incrementalUtility (A.size(), 0.0);
     bool flag = true;
     while (termination (tBegin, timeLimit) != true) {
-        tSolution solution = greedyRandomizedConstruction(A, &incrementalUtility, alpha, generator);
-        localSearch(A, &incrementalUtility, generator, &solution);
+        tSolution solution = greedyRandomizedConstruction(A, alpha, generator, &incrementalUtility);
+        localSearch(A, searchMethod, generator, &incrementalUtility, &solution);
 
         if (!isFeasible(solution)) {
             repair(A, &incrementalUtility, &solution);
@@ -201,8 +195,8 @@ int main (int argc, char * argv[]) {
     chrono :: high_resolution_clock :: time_point tBegin = chrono :: high_resolution_clock :: now();
     ulint seed = 0;
     ulint timeLimit = 10;
-    double alpha = 0.3;
     int searchMethod; // 0 = first-improving; 1 = best-improving
+    double alpha = 0.5;
 
     if (argc >= 2) {
         seed = atoi(argv[1]);
@@ -213,23 +207,27 @@ int main (int argc, char * argv[]) {
     }
 
     if (argc >= 4) {
-        alpha = atof(argv[3]);
+        searchMethod = atoi(argv[3]);
     }
 
     if (argc >= 5) {
-        searchMethod = atoi(argv[4]);
+        alpha = atof(argv[4]);
     }
 
-    if (alpha < 0.0) {
-        alpha = 0.0;
-    } else if (alpha > 1.0) {
-        alpha = 1.0;
+    if (seed == 0) {
+        seed = tBegin.time_since_epoch().count();
     }
 
     if (searchMethod < 0) {
         searchMethod = 0;
     } else if (searchMethod > 1) {
         searchMethod = 1;
+    }
+
+    if (alpha < 0.0) {
+        alpha = 0.0;
+    } else if (alpha > 1.0) {
+        alpha = 1.0;
     }
 
     uint n;
@@ -244,7 +242,7 @@ int main (int argc, char * argv[]) {
         }
     }
 
-    tSolution solution = grasp(A, tBegin, timeLimit, alpha, seed);
+    tSolution solution = grasp(A, seed, timeLimit, searchMethod, alpha, tBegin);
 
     cout << "maxVal = " << solution.second << endl;
 
