@@ -4,6 +4,7 @@
 #include <chrono>
 #include <limits>
 #include <iterator>
+#include <set>
 
 using namespace std;
 
@@ -84,6 +85,46 @@ void repair(matrix A, vector <double> * incrementalUtility, tSolution * solution
     // desligar bits até se tornar factível
     // dar preferencia pros bits que violam mais restricões
     // em caso de empate, dar preferencia pros que diminuem menos a utilidade
+    vector <uint> restrictionsViolatedCounter (A.size(), 0);
+    set <uint> invalidBits;
+    for (uint i = 0; i < A.size(); i++) {
+        if ((*solution).first[i] == 1) {
+            if (i >= 1) {
+                if ((*solution).first[i - 1] == 1) {
+                    restrictionsViolatedCounter[i]++;
+                    invalidBits.insert(i);
+                }
+            }
+            if (i < A.size() - 1) {
+                if ((*solution).first[i + 1] == 1) {
+                    restrictionsViolatedCounter[i]++;
+                    invalidBits.insert(i);
+                }
+            }
+        }
+    }
+    while (!isFeasible(*solution) && invalidBits.size() > 0) {
+        uint chosenBit = *(invalidBits.begin());
+        for (set <uint> :: iterator it = invalidBits.begin(); it != invalidBits.end(); it++) {
+            uint i = *it;
+            if (restrictionsViolatedCounter[chosenBit] < restrictionsViolatedCounter[i]) {
+                chosenBit = i;
+            } else if (restrictionsViolatedCounter[chosenBit] == restrictionsViolatedCounter[i]) {
+                if ((*incrementalUtility)[chosenBit] > (*incrementalUtility)[i]) {
+                    chosenBit = i;
+                }
+            }
+        }
+        (*solution).first[chosenBit] = 0;
+        (*solution).second -= (*incrementalUtility)[chosenBit];
+        (*incrementalUtility)[chosenBit] -= A[chosenBit][chosenBit];
+        for (uint j = 0; j < A.size(); j++) {
+            if (j != chosenBit) {
+                (*incrementalUtility)[j] -= (*solution).first[j] * (A[j][chosenBit] + A[chosenBit][j]);
+            }
+        }
+        invalidBits.erase(chosenBit);
+    }
 }
 
 void localSearch(matrix A, int searchMethod, default_random_engine generator, vector <double> * incrementalUtility, tSolution * solution) {
