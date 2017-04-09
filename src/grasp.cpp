@@ -23,30 +23,43 @@ double evaluateUtility (matrix A, vector <uint> solution) {
     return result;
 }
 
+double evaluatecontribuition (matrix A, vector <uint> solution, uint i) {
+    double result = A[i][i];
+    for (uint j = 0; j < A[i].size(); j++) {
+        if (i != j) {
+            result += solution[j] * (A[i][j] + A[j][i]);
+        }
+    }
+    return result;
+}
+
 tSolution greedyRandomizedConstruction (matrix A, double alpha, default_random_engine generator) {
     tSolution result = make_pair(vector <uint> (A.size(), 0), 0.0);
-    while (true) {
+    bool flag = true;
+    while (flag) {
         double minUtility = 0, maxUtility = 0;
-        bool flag = true;
+        bool flag2 = true;
         vector < pair <uint, double> > candidateList;
         for (uint i = 0; i < A.size(); i++) {
             tSolution solution;
             solution.first = vector <uint> (result.first);
+            solution.second = result.second;
             if (solution.first[i] == 0) { // if 'i' is not in solution
                 solution.first[i] = 1;
-                solution.second = evaluateUtility (A, solution.first);
+                double contribuition = evaluatecontribuition(A, solution.first, i);
+                solution.second += contribuition;
                 if (solution.second >= result.second) { // if 'i' can improve solution
-                    candidateList.push_back(make_pair(i, solution.second - result.second));
-                    if (flag) {
-                        flag = false;
-                        minUtility = solution.second - result.second;
-                        maxUtility = solution.second - result.second;
+                    candidateList.push_back(make_pair(i, contribuition));
+                    if (flag2) {
+                        flag2 = false;
+                        minUtility = contribuition;
+                        maxUtility = contribuition;
                     }
-                    if (minUtility > solution.second - result.second) {
-                        minUtility = solution.second - result.second;
+                    if (minUtility > contribuition) {
+                        minUtility = contribuition;
                     }
-                    if (maxUtility < solution.second - result.second) {
-                        maxUtility = solution.second - result.second;
+                    if (maxUtility < contribuition) {
+                        maxUtility = contribuition;
                     }
                 }
             }
@@ -70,8 +83,8 @@ tSolution greedyRandomizedConstruction (matrix A, double alpha, default_random_e
             result.first[i] = 1;
             result.second += deltaUtility;
         } else {
-            // if there is no candidate, break out the loop
-            break;
+            // if there is no candidate, break out of the loop
+            flag = false;
         }
     }
     return result;
@@ -122,19 +135,24 @@ void repair (matrix A, tSolution * solution) {
             } else if (restrictionsViolatedCounter[chosenBit] == restrictionsViolatedCounter[i]) {
                 tSolution chosenNewSolution;
                 chosenNewSolution.first = vector <uint> ((*solution).first);
+                chosenNewSolution.second = (*solution).second;
+                double chosenContribution = evaluatecontribuition(A, chosenNewSolution.first, chosenBit);
                 chosenNewSolution.first[chosenBit] = 0;
-                chosenNewSolution.second = evaluateUtility(A, chosenNewSolution.first);
+                chosenNewSolution.second -= chosenContribution;
                 tSolution newSolution;
                 newSolution.first = vector <uint> ((*solution).first);
+                newSolution.second = (*solution).second;
+                double newContribution = evaluatecontribuition(A, newSolution.first, i);
                 newSolution.first[i] = 0;
-                newSolution.second = evaluateUtility(A, newSolution.first);
+                newSolution.second -= newContribution;
                 if (chosenNewSolution.second < newSolution.second) {
                     chosenBit = i;
                 }
             }
         }
+        double contribuition = evaluatecontribuition(A, (*solution).first, chosenBit);
         (*solution).first[chosenBit] = 0;
-        (*solution).second = evaluateUtility(A, (*solution).first);
+        (*solution).second -= contribuition;
         invalidBits.erase(chosenBit);
     }
 }
@@ -157,7 +175,7 @@ void localSearch (matrix A, int searchMethod, default_random_engine generator, t
         }
     }
     // 3Flip neighborhood
-    for (uint i = 0; i < A.size(); i++) {
+/*    for (uint i = 0; i < A.size(); i++) {
         for (uint j = i + 1; j < A.size(); j++) {
             for (uint k = j + 1; k < A.size(); k++) {
                 vector <uint> neighbor;
@@ -168,28 +186,34 @@ void localSearch (matrix A, int searchMethod, default_random_engine generator, t
             }
         }
     }
+*/
     shuffle (neighborhood.begin(), neighborhood.end(), generator);
-    for (vector < vector <uint> > :: iterator it = neighborhood.begin(); it != neighborhood.end(); it++) {
+    bool flag = true;
+    for (vector < vector <uint> > :: iterator it = neighborhood.begin(); flag && it != neighborhood.end(); it++) {
         vector <uint> neighbor = *it;
         tSolution newSolution = make_pair(vector <uint> ((*solution).first), (*solution).second);
         for (vector <uint> :: iterator it2 = neighbor.begin(); it2 != neighbor.end(); it2++) {
             uint i = *it2;
+            double contribuition = evaluatecontribuition(A, newSolution.first, i);
             if (newSolution.first[i] == 0) {
                 newSolution.first[i] = 1;
+                newSolution.second += contribuition;
             } else {
                 newSolution.first[i] = 0;
+                newSolution.second -= contribuition;
             }
         }
-        newSolution.second = evaluateUtility(A, newSolution.first);
+/*
         if (!isFeasible(newSolution)) {
             repair (A, &newSolution);
         }
+*/
         if (isFeasible(newSolution) && newSolution.second > (*solution).second) {
-            if (searchMethod == 0) {
-                break;
-            }
             (*solution).first = vector <uint> (newSolution.first);
             (*solution).second = newSolution.second;
+            if (searchMethod == 0) {
+                flag = false;
+            }
         }
     }
 }
