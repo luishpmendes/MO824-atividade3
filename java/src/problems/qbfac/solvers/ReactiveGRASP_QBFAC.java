@@ -94,7 +94,9 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
         }
 
         public static void main(String[] args) throws IOException {
+                
                 long testTime = 180000;
+                //long testTime = 1000;
                 
                 // Instance: 20
                 // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
@@ -107,6 +109,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		long endTime   = System.currentTimeMillis();
 		long totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -122,6 +125,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -137,6 +141,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -152,6 +157,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -167,6 +173,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -182,6 +189,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -197,6 +205,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -212,6 +221,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -227,6 +237,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -242,6 +253,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -257,6 +269,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -272,6 +285,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -287,6 +301,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -302,6 +317,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -317,6 +333,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -332,6 +349,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -347,6 +365,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -362,6 +381,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -377,6 +397,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
                 
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
@@ -392,6 +413,7 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
 		System.out.println("maxVal = " + bestSol);
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
+                System.out.println("Last: " + grasp.toString());
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
 
 	}

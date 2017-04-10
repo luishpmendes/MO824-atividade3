@@ -250,8 +250,8 @@ public abstract class AbstractGRASP<E> {
 				if (verbose)
 					System.out.println(this.toString());//"(Iter. " + currentIteration + ") BestSol = " + bestSol);
 			}
-                        if (verbose)
-				System.out.println(this.toString());//"(Iter. " + currentIteration + ") BestSol = " + bestSol);
+                        //if (verbose)
+			//	System.out.println(this.toString());//"(Iter. " + currentIteration + ") BestSol = " + bestSol);
                         long endTime   = System.currentTimeMillis();
                         long totalTime = endTime - startTime;
                         currentIteration++;
