@@ -193,14 +193,289 @@ public class GRASP_QBFAC extends GRASP_QBF {
 	 */
 	public static void main(String[] args) throws IOException {
 
+                // Instance: 20
+                // Alpha: 0.1
+                // Best Improving
+                System.out.println("Instance = 20, Alpha = 0.1, Best Improving");
 		long startTime = System.currentTimeMillis();
-		GRASP_QBFAC grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf100", true);
+		GRASP_QBFAC grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf020", true);
 		Solution<Integer> bestSol = grasp.solveLimitedByTime();
 		System.out.println("maxVal = " + bestSol);
 		long endTime   = System.currentTimeMillis();
 		long totalTime = endTime - startTime;
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
-
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 20
+                // Alpha: 0.4
+                // Best Improving
+                System.out.println("Instance = 20, Alpha = 0.4, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf020", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 40
+                // Alpha: 0.1
+                // Best Improving
+                System.out.println("Instance = 40, Alpha = 0.1, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf040", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 40
+                // Alpha: 0.4
+                // Best Improving
+                System.out.println("Instance = 40, Alpha = 0.4, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf040", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alpha: 0.1
+                // Best Improving
+                System.out.println("Instance = 60, Alpha = 0.1, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf060", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alpha: 0.4
+                // Best Improving
+                System.out.println("Instance = 60, Alpha = 0.4, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf060", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alpha: 0.1
+                // Best Improving
+                System.out.println("Instance = 80, Alpha = 0.1, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf080", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alpha: 0.4
+                // Best Improving
+                System.out.println("Instance = 80, Alpha = 0.4, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf080", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alpha: 0.1
+                // Best Improving
+                System.out.println("Instance = 100, Alpha = 0.1, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf100", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alpha: 0.4
+                // Best Improving
+                System.out.println("Instance = 100, Alpha = 0.4, Best Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf100", true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 20
+                // Alpha: 0.1
+                // First Improving
+                System.out.println("Instance = 20, Alpha = 0.1, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf020", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 20
+                // Alpha: 0.4
+                // First Improving
+                System.out.println("Instance = 20, Alpha = 0.4, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf020", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 40
+                // Alpha: 0.1
+                // First Improving
+                System.out.println("Instance = 40, Alpha = 0.1, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf040", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 40
+                // Alpha: 0.4
+                // First Improving
+                System.out.println("Instance = 40, Alpha = 0.4, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf040", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alpha: 0.1
+                // First Improving
+                System.out.println("Instance = 60, Alpha = 0.1, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf060", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alpha: 0.4
+                // First Improving
+                System.out.println("Instance = 60, Alpha = 0.4, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf060", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alpha: 0.1
+                // First Improving
+                System.out.println("Instance = 80, Alpha = 0.1, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf080", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alpha: 0.4
+                // First Improving
+                System.out.println("Instance = 80, Alpha = 0.4, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf080", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alpha: 0.1
+                // First Improving
+                System.out.println("Instance = 100, Alpha = 0.1, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.1, (long)100000, "instances/qbf100", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("----------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alpha: 0.4
+                // First Improving
+                System.out.println("Instance = 100, Alpha = 0.4, First Improving");
+		startTime = System.currentTimeMillis();
+		grasp = new GRASP_QBFAC(0.4, (long)100000, "instances/qbf100", false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
 	}
+        
+        @Override
+        public String toString() {
+            return "(Iter. " + currentIteration + ") BestSol = " + bestSol + ", IncumbentSol = " + incumbentSol;
+        }
 
 }

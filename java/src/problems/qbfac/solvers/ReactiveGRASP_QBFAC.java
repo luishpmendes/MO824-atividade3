@@ -16,14 +16,14 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
         protected List<Integer> quantities;
     
 	public ReactiveGRASP_QBFAC(Integer iterations, String filename, List<Double> alphas, Boolean bestImproving) throws IOException {
-		super(0.0, iterations, filename, bestImproving);
+		super(-1.0, iterations, filename, bestImproving);
                 this.alphas = alphas;
                 createProbabilities();
                 //this.verbose = false;
 	}
         
         public ReactiveGRASP_QBFAC(Long timeLimit, String filename, List<Double> alphas, Boolean bestImproving) throws IOException {
-		super(0.0, timeLimit, filename, bestImproving);
+		super(-1.0, timeLimit, filename, bestImproving);
                 this.alphas = alphas;
                 createProbabilities();
                 //this.verbose = false;
@@ -94,14 +94,304 @@ public class ReactiveGRASP_QBFAC extends GRASP_QBFAC {
         }
 
         public static void main(String[] args) throws IOException {
-
-		long startTime = System.currentTimeMillis();
-                List<Double> alphas = Arrays.asList(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
-		ReactiveGRASP_QBFAC grasp = new ReactiveGRASP_QBFAC((long)100000, "instances/qbf100", alphas, false);
+                long testTime = 180000;
+                
+                // Instance: 20
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // Best Improving
+		System.out.println("Instance = 20, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], Best Improving");
+                long startTime = System.currentTimeMillis();
+                List<Double> alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		ReactiveGRASP_QBFAC grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf020", alphas, true);
 		Solution<Integer> bestSol = grasp.solveLimitedByTime();
 		System.out.println("maxVal = " + bestSol);
 		long endTime   = System.currentTimeMillis();
 		long totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 20
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // Best Improving
+		System.out.println("Instance = 20, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf020", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+
+                // Instance: 40
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // Best Improving
+		System.out.println("Instance = 40, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf040", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+
+                // Instance: 40
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // Best Improving
+		System.out.println("Instance = 40, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf040", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // Best Improving
+		System.out.println("Instance = 60, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf060", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // Best Improving
+		System.out.println("Instance = 60, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf060", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // Best Improving
+		System.out.println("Instance = 80, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf080", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // Best Improving
+		System.out.println("Instance = 80, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf080", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // Best Improving
+		System.out.println("Instance = 100, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf100", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // Best Improving
+		System.out.println("Instance = 100, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], Best Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf100", alphas, true);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 20
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // First Improving
+		System.out.println("Instance = 20, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf020", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 20
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // First Improving
+		System.out.println("Instance = 20, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf020", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 40
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // First Improving
+		System.out.println("Instance = 40, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf040", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 40
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // First Improving
+		System.out.println("Instance = 40, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf040", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // First Improving
+		System.out.println("Instance = 60, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf060", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 60
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // First Improving
+		System.out.println("Instance = 60, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf060", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // First Improving
+		System.out.println("Instance = 80, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf080", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 80
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // First Improving
+		System.out.println("Instance = 80, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf080", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                // First Improving
+		System.out.println("Instance = 100, Alphas = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf100", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
+		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+                
+                System.out.println("-------------------------------------------------------------------------------------------------------------------");
+                
+                // Instance: 100
+                // Alpha: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+                // First Improving
+		System.out.println("Instance = 100, Alphas = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0], First Improving");
+                startTime = System.currentTimeMillis();
+                alphas = Arrays.asList(0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0);
+		grasp = new ReactiveGRASP_QBFAC(testTime, "instances/qbf100", alphas, false);
+		bestSol = grasp.solveLimitedByTime();
+		System.out.println("maxVal = " + bestSol);
+		endTime   = System.currentTimeMillis();
+		totalTime = endTime - startTime;
 		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
 
 	}
